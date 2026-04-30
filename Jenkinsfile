@@ -61,6 +61,8 @@ pipeline {
         stage('Deploy') {
           steps {
             script {
+            sh 'docker ps -f name=learning-jenkins -q | xargs -r docker stop'
+            sh 'docker ps -a -f name=learning-jenkins -q | xargs -r docker rm'
                             // 2. Run the new container from the image you just pushed
                 // Note: Replace 'your-docker-id' with your actual username
                 sh 'docker run -d --name learning-jenkins -p 8085:8085 shri18242/jenkins-devops-microservice:latest'
