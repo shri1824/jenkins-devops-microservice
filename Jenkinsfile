@@ -30,6 +30,32 @@ pipeline {
                 // Add your test steps here
             }
         }
+        stage('Package') {
+            steps {
+                sh 'mvn clean package'
+                // Add your package steps here
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    def imageName = "shri18242/jenkins-devops-microservice:${BUILD_NUMBER}"
+                    //sh "docker build -t ${imageName} ."
+                     dockerImage = docker.build(imageName)
+                    // Optionally, you can push the image to a registry here
+                }
+        }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('', 'githubcredencial') {
+                    //sh "docker push ${imageName}"
+                    dockerImage.push(imageName)
+                    dockerImage.push('latest') // Optionally tag as latest
+                    }
+                }
+            }
+        }   
 
     }
     post {
