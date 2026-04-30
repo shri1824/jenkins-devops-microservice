@@ -39,9 +39,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def imageName = "shri18242/jenkins-devops-microservice:${BUILD_NUMBER}"
+                    // def imageName = "shri18242/jenkins-devops-microservice:${BUILD_NUMBER}"
                     //sh "docker build -t ${imageName} ."
-                     dockerImage = docker.build(imageName)
+                     dockerImage = docker.build("shri18242/jenkins-devops-microservice:${BUILD_NUMBER}")
                     // Optionally, you can push the image to a registry here
                 }
            }
@@ -52,8 +52,8 @@ pipeline {
                 script {
                     docker.withRegistry('', 'githubcredencial') {
                     //sh "docker push ${imageName}"
-                    dockerImage.push(imageName)
-                    dockerImage.push('latest') // Optionally tag as latest
+                    dockerImage.push();
+                    dockerImage.push('latest'); // Optionally tag as latest
                     }
                 }
             }
