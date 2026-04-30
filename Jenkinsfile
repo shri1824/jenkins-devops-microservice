@@ -20,4 +20,18 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            echo 'This will always run after the stages.'
+            // Add any cleanup steps here
+        }
+        success {
+            echo 'This will run only if the stages succeed.'
+            // Add any success steps here
+        }        
+        failure {
+            echo 'This will run only if the stages fail.'
+            // Add any failure steps here
+        }
+    }
 }
