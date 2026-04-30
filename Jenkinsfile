@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'maven:3.8.4-openjdk-17'
+            image 'maven:latest'
         }
     }
     stages {
@@ -37,10 +37,6 @@ pipeline {
         failure {
             echo 'This will run only if the stages fail.'
             // Add any failure steps here
-        }
-        changed {
-            echo 'This will run only if there is a change in the SCM.(build like from fail to success)'
-            // Add any steps to handle changes here
         }
     }
 }
