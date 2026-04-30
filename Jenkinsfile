@@ -57,7 +57,16 @@ pipeline {
                     }
                 }
             }
-        }   
+        }
+        stage('Deploy') {
+    steps {
+        script {
+                        // 2. Run the new container from the image you just pushed
+            // Note: Replace 'your-docker-id' with your actual username
+            sh 'docker run -d --name my-app -p 8085:8080 shri18242/jenkins-devops-microservice:latest'
+        }
+    }
+}   
 
     }
     post {
