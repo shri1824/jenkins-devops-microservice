@@ -38,7 +38,7 @@ pipeline {
             echo 'This will run only if the stages fail.'
             // Add any failure steps here
         }
-        change {
+        changed {
             echo 'This will run only if there is a change in the SCM.(build like from fail to success)'
             // Add any steps to handle changes here
         }
