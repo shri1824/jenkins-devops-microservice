@@ -6,8 +6,8 @@ pipeline {
             steps {
                 // sh 'mvn --version'
                 echo 'Building...'
-                echo 'BUILD_NUMBER: ${BUILD_ID}'
-                echo 'BUILD_URL: ${BUILD_URL}'
+                echo "BUILD_NUMBER: ${BUILD_NUMBER}"
+                echo "BUILD_URL: ${BUILD_URL}"
                 // Add your build steps here
             }
         }
