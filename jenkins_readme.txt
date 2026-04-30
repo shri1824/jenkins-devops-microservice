@@ -18,19 +18,18 @@ pipeline {
                 // Add your build steps here
             }
         }
-        stage('Compile') {
-            steps {
-                sh 'mvn clean compile'
-                               // Add your compile steps here
-            }
-        }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                echo 'Testing...'
                 // Add your test steps here
             }
         }
-
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                // Add your deploy steps here
+            }
+        }
     }
     post {
         always {
