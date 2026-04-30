@@ -44,7 +44,9 @@ pipeline {
                      dockerImage = docker.build(imageName)
                     // Optionally, you can push the image to a registry here
                 }
+           }
         }
+
         stage('Push Docker Image') {
             steps {
                 script {
