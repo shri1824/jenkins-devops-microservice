@@ -1,17 +1,10 @@
 pipeline {
     // agent {docker { image 'maven:latest'}}
     agent any
-    environment {
-        dockerHome = tool 'myDocker' // Assuming you have a Docker tool configured in Jenkins
-        mavenHome = tool 'myMaven' // Assuming you have a Maven tool configured in Jenkins
-        PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-        // MAVEN_HOME = '/usr/local/maven'
-    }
     stages {
         stage('Build') {
             steps {
-                sh 'mvn --version'
-                sh 'docker --version'
+                // sh 'mvn --version'
                 echo 'Building...'
                 echo "BUILD_NUMBER: ${BUILD_NUMBER}"
                 echo "BUILD_URL: ${BUILD_URL}"
