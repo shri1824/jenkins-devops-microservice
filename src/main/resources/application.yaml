@@ -2,4 +2,4 @@ spring:
   application:
     name: learning-jenkins
 server:
-  port: 8085
+  port: 8086

@@ -65,7 +65,7 @@ pipeline {
             sh 'docker ps -a -f name=learning-jenkins -q | xargs -r docker rm'
                             // 2. Run the new container from the image you just pushed
                 // Note: Replace 'your-docker-id' with your actual username
-                sh 'docker run -d --name learning-jenkins -p 8085:8085 shri18242/jenkins-devops-microservice:latest'
+                sh 'docker run -d --name learning-jenkins -p 8086:8086 shri18242/jenkins-devops-microservice:latest'
             }
           } 
          }
