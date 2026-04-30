@@ -6,8 +6,8 @@ pipeline {
             steps {
                 // sh 'mvn --version'
                 echo 'Building...'
-                echo 'BUILD_NUMBER: ${env.BUILD_ID}'
-                echo 'JOB_NAME: ${env.JOB_NAME}'
+                echo 'BUILD_NUMBER: $env.BUILD_ID'
+                echo 'JOB_NAME: $env.JOB_NAME'
                 // Add your build steps here
             }
         }
