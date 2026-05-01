@@ -8,67 +8,13 @@ pipeline {
         // MAVEN_HOME = '/usr/local/maven'
     }
     stages {
-        stage('Build') {
+ 
+        stage('Check GCP auth') {
             steps {
-                sh 'mvn --version'
-                sh 'docker --version'
-                echo 'Building...'
-                echo "BUILD_NUMBER: ${BUILD_NUMBER}"
-                echo "BUILD_URL: ${BUILD_URL}"
-                // Add your build steps here
+                sh 'gcloud auth list'
+                // Add any additional GCP authentication checks here
             }
         }
-        stage('Compile') {
-            steps {
-                sh 'mvn clean compile'
-                               // Add your compile steps here
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-                // Add your test steps here
-            }
-        }
-        stage('Package') {
-            steps {
-                sh 'mvn clean package'
-                // Add your package steps here
-            }
-        }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    // def imageName = "shri18242/jenkins-devops-microservice:${BUILD_NUMBER}"
-                    //sh "docker build -t ${imageName} ."
-                     dockerImage = docker.build("shri18242/jenkins-devops-microservice:${BUILD_NUMBER}")
-                    // Optionally, you can push the image to a registry here
-                }
-           }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('', 'githubcredencial') {
-                    //sh "docker push ${imageName}"
-                    dockerImage.push();
-                    dockerImage.push('latest'); // Optionally tag as latest
-                    }
-                }
-            }
-        }
-        stage('Deploy') {
-          steps {
-            script {
-            sh 'docker ps -f name=learning-jenkins -q | xargs -r docker stop'
-            // sh 'docker ps -a -f name=learning-jenkins -q | xargs -r docker rm'
-                            // 2. Run the new container from the image you just pushed
-                // Note: Replace 'your-docker-id' with your actual username
-                sh 'docker run -d --name learning-jenkins -p 8086:8086 shri18242/jenkins-devops-microservice:latest'
-            }
-          } 
-         }
 
     }
     post {
